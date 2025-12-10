@@ -1,10 +1,8 @@
 <script setup>
-import { onMounted, ref } from 'vue'
+import { ref } from 'vue'
 
 const username = ref('John Pork')
 const userstatus = ref(1)
-const newTask = ref("")
-const tasks = ref([])
 
 const toggleStatus = () => {
   switch (userstatus.value) {
@@ -16,48 +14,12 @@ const toggleStatus = () => {
       break
   }
 }
-
-const addTask = () => {
-	if(newTask.value.trim() !== '') {
-		tasks.value.push(newTask.value)
-		newTask.value = ''
-	}
-}
-
-const deleteTask = (index) => {
-	tasks.value.splice(index, 1);
-}
-
-onMounted(async () => {
-	try {
-		const response = await fetch('https://jsonplaceholder.typicode.com/todos');
-		const data = await response.json();
-		tasks.value = data.map((task) => task.title);
-	} catch (error) {
-		console.error('Error fetching tasks');
-	}
-});
 </script>
 
 <template>
-  <h1>Lantern</h1>
-  <h2>Welcome, {{ username }}</h2>
-  <p v-if="userstatus === 1">Online</p>
-  <p v-else>Offline</p>
-  <button @click="toggleStatus">Balls</button>
-
-  <ul>
-	<li v-for="(task, index) in tasks" :key="task">
-		<span>
-			{{ task }}
-		</span>
-		<button @click="deleteTask(index)">x</button>
-	</li>
-  </ul>
-
-  <form @submit.prevent="addTask">
-	<label for="newTask">Add task</label>
-	<input type="text" id="newTask" name="newTask" v-model="newTask"></input>
-	<input type="submit"></input>
-  </form>
+  <h1 class="text-9xl text-lime-500 placecontent-center-safe">Lantern</h1>
+  <h2 class="text-5xl">Welcome, {{ username }}</h2>
+  <p v-if="userstatus === 1" class="text-2xl">Online</p>
+  <p v-else class="text-2xl">Offline</p>
+  <button @click="toggleStatus" class="bg-lime-300 border-2 border-lime-400">Balls</button>
 </template>
