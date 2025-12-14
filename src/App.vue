@@ -1,5 +1,6 @@
 <script setup>
 import { ref } from 'vue'
+import { Button } from './components/ui/button'
 
 const username = ref('John Pork')
 const userstatus = ref(1)
@@ -21,5 +22,5 @@ const toggleStatus = () => {
   <h2 class="text-5xl">Welcome, {{ username }}</h2>
   <p v-if="userstatus === 1" class="text-2xl">Online</p>
   <p v-else class="text-2xl">Offline</p>
-  <button @click="toggleStatus" class="bg-lime-300 border-2 border-lime-400">Balls</button>
+  <button @click="toggleStatus">Balls</button>
 </template>
